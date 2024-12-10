@@ -50,7 +50,6 @@
   - Achieved <5% failure rate after performance tuning.
   - Identified scaling limitations for 10,000 RPS, which requires cloud deployment.
 
----
 ### Pending Work - Scale to 10,000 Requests per Second
 - The microservice currently achieves ~2000 RPS locally due to hardware limits.
 - Recommended Next Steps:
@@ -58,7 +57,6 @@
   - Use cloud-based tools (e.g., AWS Elastic Beanstalk, Azure App Service) to handle higher RPS.
   - Configure additional caching or database replication if necessary.
 
----
 ### Files and Their Purposes
 1. `app.py`: The Flask microservice implementation.
 2. `locustfile.py`: Load testing script for simulating requests.
@@ -67,7 +65,6 @@
 5. `data.py`: Script for preparing and transforming the dataset.
 6. `spotify_top_200.parquet`: Preprocessed dataset for use in the microservice.
 
----
 ### How to Test Locally
 1. Run the microservice:
    - Open a terminal and run:
@@ -99,6 +96,5 @@
      ```
    - Test the updated image using the steps above.
 
----
 ### Final Repository Link:
 https://github.com/nogibjj/IDS706_Final_Spotify_Microservice
