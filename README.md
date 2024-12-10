@@ -22,7 +22,6 @@
 - Logs are written to both the console and a file (`app.log`).
 - Verified correctness during various test scenarios.
 
-
 **3. Dockerization**
 - Created a production-ready Dockerfile:
   - Uses `gunicorn` as a WSGI server for performance.
@@ -52,7 +51,6 @@
   - Identified scaling limitations for 10,000 RPS, which requires cloud deployment.
 
 ---
-
 ### Pending Work - Scale to 10,000 Requests per Second
 - The microservice currently achieves ~2000 RPS locally due to hardware limits.
 - Recommended Next Steps:
@@ -61,7 +59,6 @@
   - Configure additional caching or database replication if necessary.
 
 ---
-
 ### Files and Their Purposes
 1. `app.py`: The Flask microservice implementation.
 2. `locustfile.py`: Load testing script for simulating requests.
