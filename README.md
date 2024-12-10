@@ -7,8 +7,8 @@
 **1. Core Microservice Implementation**
 - Technology: Python (Flask framework).
 - Endpoints:
-  1. `/rankings`: Fetch top-ranked tracks by region and date.
-  2. `/artist`: Retrieve track data for a specific artist.
+  - `/rankings`: Fetch top-ranked tracks by region and date.
+  - `/artist`: Retrieve track data for a specific artist.
 - Optimizations:
   - Cached grouped data for faster query performance.
   - Optimized database filtering and ranking logic.
