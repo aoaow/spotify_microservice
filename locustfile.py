@@ -1,14 +1,12 @@
 from locust import HttpUser, task, between
 
-
 class SpotifyMicroserviceUser(HttpUser):
-    # Set a wait time between tasks
     wait_time = between(1, 2)
 
     @task
-    def test_rankings(self):
-        self.client.get("/rankings?region=United States&date=2021-01-01&limit=10")
+    def test_filters(self):
+        self.client.get("/filters", timeout=30)
 
     @task
-    def test_artist(self):
-        self.client.get("/artist?artist=Shakira&limit=5&offset=10")
+    def test_tracks(self):
+        self.client.get("/tracks?date=2021-01-01&region=United States&artist=Shakira&limit=20&offset=0", timeout=30)

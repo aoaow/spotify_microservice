@@ -12,22 +12,16 @@
             <h1 class="text-3xl font-bold mb-8">Spotify Top Tracks Analytics</h1>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <select class="p-2 border rounded">
+                <select name="date" class="p-2 border rounded">
                     <option value="">Select Date</option>
-                    <option>2020-05-01</option>
-                    <option>2020-05-02</option>
                 </select>
 
-                <select class="p-2 border rounded">
+                <select name="region" class="p-2 border rounded">
                     <option value="">Select Region</option>
-                    <option>Canada</option>
-                    <option>United States</option>
                 </select>
 
-                <select class="p-2 border rounded">
+                <select name="artist" class="p-2 border rounded">
                     <option value="">Select Artist</option>
-                    <option>Lil Baby</option>
-                    <option>Drake</option>
                 </select>
             </div>
 
@@ -42,20 +36,82 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">148</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="https://open.spotify.com/track/02RCbjb9czvQKNG..." class="text-blue-600 hover:text-blue-900">
-                                    Woah
-                                </a>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">Lil Baby</td>
-                            <td class="px-6 py-4 whitespace-nowrap">35,211</td>
-                        </tr>
+                        <!-- Rows will be dynamically inserted here -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <script>
+        async function fetchFilters() {
+            const response = await fetch('/filters');
+            const filters = await response.json();
+
+            const dateSelect = document.querySelector('select[name="date"]');
+            const regionSelect = document.querySelector('select[name="region"]');
+            const artistSelect = document.querySelector('select[name="artist"]');
+
+            // Populate Date options
+            filters.dates.forEach(date => {
+                const option = document.createElement('option');
+                option.value = date;
+                option.textContent = date;
+                dateSelect.appendChild(option);
+            });
+
+            // Populate Region options
+            filters.regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                regionSelect.appendChild(option);
+            });
+
+            // Populate Artist options
+            filters.artists.forEach(artist => {
+                const option = document.createElement('option');
+                option.value = artist;
+                option.textContent = artist;
+                artistSelect.appendChild(option);
+            });
+        }
+
+        async function fetchTracks() {
+            const date = document.querySelector('select[name="date"]').value;
+            const region = document.querySelector('select[name="region"]').value;
+            const artist = document.querySelector('select[name="artist"]').value;
+
+            const response = await fetch(`/tracks?date=${date}&region=${region}&artist=${artist}`);
+            const tracks = await response.json();
+
+            const tableBody = document.querySelector('tbody');
+            tableBody.innerHTML = ''; // Clear previous data
+
+            tracks.forEach((track) => {
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">${track.rank}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="${track.track_url}" class="text-blue-600 hover:text-blue-900">
+                                ${track.track_title}
+                            </a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">${track.artist}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${track.streams}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', fetchTracks);
+        });
+
+        // Fetch initial data
+        fetchFilters();
+        fetchTracks();
+    </script>
 </body>
 </html>
