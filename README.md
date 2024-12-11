@@ -29,7 +29,7 @@
   - Exposes port 5000 for microservice access.
 - Verified the Docker image works as expected locally.
 
-**Note: When to Rebuild the Docker Image?**
+⚠️**Note: When to Rebuild the Docker Image?**
 - If any of the following files are updated:
     - `app.py` (microservice logic).
     - `requirements.txt` (dependencies).
@@ -43,6 +43,23 @@
     ```bash
     docker run -p 5000:5000 spotify_microservice
     ```
+
+⚠️**Future Flexibility with Container Registries**
+
+The Docker image for this microservice is built and tested locally to simplify the development and debugging process. This allows for quick iteration without requiring external dependencies or accounts. But additional flexibility can be achieved by integrating with an online container registry like Docker Hub, AWS ECR, or Azure Container Registry.
+
+Steps for Future Deployment:
+- Login to Docker Hub or another registry:
+  ```bash
+  docker login
+  ```
+- Tag and push the image:
+  ```bash
+  docker tag spotify_microservice your_username/spotify_microservice:latest
+  docker push your_username/spotify_microservice:latest
+  ```
+- Integrate with CI/CD: Add Docker credentials to GitHub Secrets and Update CI/CD workflows to build and push images automatically.
+
 
 **4. Load Testing**
 - Wrote a `locustfile.py` script to simulate concurrent requests:
