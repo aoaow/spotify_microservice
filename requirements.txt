@@ -21,3 +21,4 @@ Pillow
 matplotlib
 python-dotenv
 gunicorn
+astroid
