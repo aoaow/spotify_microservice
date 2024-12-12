@@ -23,4 +23,5 @@ COPY data/spotify_top_200.parquet /app/data/
 EXPOSE 3000
 
 # Use Gunicorn to serve the app in production
-CMD ["gunicorn", "--workers=2", "--threads=2", "-b", "0.0.0.0:3000", "project.app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:3000", "project.app:app"]
+

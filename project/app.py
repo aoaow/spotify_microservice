@@ -1,3 +1,8 @@
+import sys
+import os
+# Add the parent directory of 'project' to the module search path
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from config.database import init_db, load_data_from_df, process_spotify_data
@@ -22,15 +27,14 @@ load_data_from_df(df)
 
 @app.route('/filters', methods=['GET'])
 def get_filters():
-    """
-    API endpoint to get filter options: dates, regions, and artists.
-    """
     try:
+        print("Received request for /filters")
         filters = Track.get_filters()
+        print(f"Filters: {filters}")  # Log the filters
         return jsonify(filters)
     except Exception as e:
+        print(f"Error in /filters: {e}")
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/tracks', methods=['GET'])
 def get_tracks():
@@ -66,6 +70,6 @@ def index():
     return render_template('index.html')
 
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=3000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=3000, debug=True)
 
