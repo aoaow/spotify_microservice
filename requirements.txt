@@ -22,4 +22,5 @@ Pillow
 matplotlib
 python-dotenv
 gunicorn
+flask-cors
 

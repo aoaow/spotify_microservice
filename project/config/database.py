@@ -1,13 +1,17 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 import sqlite3
 import pandas as pd
-from config.logger import setup_logger
+from project.config.logger import setup_logger
+
 
 logger = setup_logger()
 
 def get_db_connection():
     """Create a database connection."""
     try:
-        conn = sqlite3.connect('spotify.db')
+        conn = sqlite3.connect('spotify.db', check_same_thread=False)
         conn.row_factory = sqlite3.Row
         return conn
     except sqlite3.Error as e:
@@ -71,7 +75,11 @@ def process_spotify_data(df):
         # Calculate rank by region
         df['rank_by_region'] = df.groupby('region')['track_streams'].rank(ascending=False)
 
+        df = df.drop_duplicates(subset=['track_title', 'artist', 'region', 'date'])
+
         return df
+        
+
     except Exception as e:
         logger.error(f"Error processing data: {e}")
         raise

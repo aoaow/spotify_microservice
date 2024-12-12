@@ -7,6 +7,10 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/health')
+def health():
+    return "OK", 200
+
 # Initialize the database schema
 init_db()
 
@@ -63,4 +67,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True, host='0.0.0.0', port=3000)
+

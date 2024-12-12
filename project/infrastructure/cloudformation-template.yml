@@ -1,0 +1,45 @@
+Resources:
+  MyVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  MySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVpc
+      CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select [ 0, !GetAZs "" ]
+
+  MyECSCluster:
+    Type: AWS::ECS::Cluster
+
+  MyTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: MyTask
+      NetworkMode: awsvpc
+      RequiresCompatibilities: 
+        - FARGATE
+      Cpu: "256"
+      Memory: "512"
+      ContainerDefinitions:
+        - Name: MyApp
+          Image: "jess0202/spotify-microservice:latest"
+          Essential: true
+
+  MyService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !Ref MyECSCluster
+      TaskDefinition: !Ref MyTaskDefinition
+      LaunchType: FARGATE
+      DesiredCount: 2
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets:
+            - !Ref MySubnet
+          AssignPublicIp: ENABLED

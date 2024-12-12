@@ -113,5 +113,12 @@ Steps for Future Deployment:
      ```
    - Test the updated image using the steps above.
 
+## Infrastructure as Code
+
+This project uses AWS CloudFormation for infrastructure provisioning. It sets up an ECS cluster and related resources for running the microservice.
+
+See the [infrastructure/README.md](infrastructure/README.md) for details and deployment instructions.
+
+
 ### Final Repository Link:
 https://github.com/nogibjj/IDS706_Final_Spotify_Microservice
