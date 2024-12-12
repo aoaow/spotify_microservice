@@ -27,10 +27,10 @@ load_data_from_df(df)
 
 @app.route('/filters', methods=['GET'])
 def get_filters():
+    print("Request received for /filters")
     try:
-        print("Received request for /filters")
-        filters = Track.get_filters()
-        print(f"Filters: {filters}")  # Log the filters
+        filters = Track.get_filters()  # Log here if necessary
+        print("Filters processed successfully")
         return jsonify(filters)
     except Exception as e:
         print(f"Error in /filters: {e}")
@@ -38,27 +38,16 @@ def get_filters():
 
 @app.route('/tracks', methods=['GET'])
 def get_tracks():
-    """
-    API endpoint to get tracks filtered by date, region, and artist.
-    """
-    date = request.args.get('date')
-    region = request.args.get('region')
-    artist = request.args.get('artist')
-
+    print("Request received for /tracks")
     try:
+        date = request.args.get('date')
+        region = request.args.get('region')
+        artist = request.args.get('artist')
         tracks = Track.get_tracks(date=date, region=region, artist=artist)
-        response = [
-            {
-                'rank': index + 1,
-                'track_title': track['track_title'],
-                'artist': track['artist'],
-                'streams': track['track_streams'],
-                'track_url': track['track_url'],
-            }
-            for index, track in enumerate(tracks)
-        ]
-        return jsonify(response)
+        print("Tracks processed successfully")
+        return jsonify(tracks)
     except Exception as e:
+        print(f"Error in /tracks: {e}")
         return jsonify({'error': str(e)}), 500
 
 
@@ -69,7 +58,7 @@ def index():
     """
     return render_template('index.html')
 
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=True)
-
+@app.errorhandler(Exception)
+def handle_exception(e):
+    print(f"Unhandled exception: {e}")
+    return jsonify({"error": "Internal Server Error"}),

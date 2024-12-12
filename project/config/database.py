@@ -8,10 +8,12 @@ from project.config.logger import setup_logger
 
 logger = setup_logger()
 
+
 def get_db_connection():
     """Create a database connection."""
     try:
         conn = sqlite3.connect('spotify.db', check_same_thread=False)
+        conn.execute("PRAGMA journal_mode=WAL;")
         conn.row_factory = sqlite3.Row
         return conn
     except sqlite3.Error as e:
