@@ -59,12 +59,6 @@ Watch the video presentation [here](https://youtu.be/KZIzitQN4ss)
   - Verified successful deployment and health checks.
   - Public endpoint available for accessing the service.
 
-**5. Load Testing**
-- Wrote a `locustfile.py` script to simulate concurrent requests:
-  - Tested with ~200 RPS locally (limited by hardware).
-  - Achieved <5% failure rate after performance tuning.
-  - Successfully tested cloud deployment via App Runner for scalability.
-
 ![alt text](image.png)
 ![alt text](1.png)
 
@@ -72,7 +66,7 @@ Watch the video presentation [here](https://youtu.be/KZIzitQN4ss)
 
 ### Load Test
 
-![load_test][total_requests_per_second_1734060700.608.png]
+![load_test](total_requests_per_second_1734060700.608.png)
 
 - Performance under Load: The system handles initial load increases well, but begins to struggle as the number of requests per second and concurrent users grow drastically. 
 - Potential Issues: The spike in response times and growing failures suggest bottlenecks, possibly in CPU, memory, or I/O capacity. 
