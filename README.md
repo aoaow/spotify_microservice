@@ -66,9 +66,9 @@ Watch the video presentation [here](https://youtu.be/KZIzitQN4ss)
 ![alt text](image.png)
 ![load_test](total_requests_per_second_1734060700.608.png)
 
-- Performance under Load: The system handles initial load increases well, but begins to struggle as the number of requests per second and concurrent users grow drastically. 
-- Potential Issues: The spike in response times and growing failures suggest bottlenecks, possibly in CPU, memory, or I/O capacity. 
--	Next Steps: Investigate system resource utilization during this test and identify the bottleneck. Consider optimizing code, scaling infrastructure, or implementing load-balancing techniques to improve system performance. The switch to AWS EC2 does not aid the situation. Due to budget limit, we might try to move our database to AWS Postgre SQL to enable transcational query optimization.
+- **Performance under Load**: The system handles initial load increases well, but begins to struggle as the number of requests per second and concurrent users grow drastically. 
+- **Potential Issues**: The spike in response times and growing failures suggest bottlenecks, possibly in CPU, memory, or I/O capacity. 
+-	**Next Steps**: Investigate system resource utilization during this test and identify the bottleneck. Consider optimizing code, scaling infrastructure, or implementing load-balancing techniques to improve system performance. The switch to AWS EC2 does not aid the situation. Due to budget limit, we might try to move our database to AWS Postgre SQL to enable transcational query optimization.
 
 ---
 
