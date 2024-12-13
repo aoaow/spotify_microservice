@@ -59,13 +59,11 @@ Watch the video presentation [here](https://youtu.be/KZIzitQN4ss)
   - Verified successful deployment and health checks.
   - Public endpoint available for accessing the service.
 
-![alt text](image.png)
-![alt text](1.png)
-
 ---
 
 ### Load Test
 
+![alt text](image.png)
 ![load_test](total_requests_per_second_1734060700.608.png)
 
 - Performance under Load: The system handles initial load increases well, but begins to struggle as the number of requests per second and concurrent users grow drastically. 
