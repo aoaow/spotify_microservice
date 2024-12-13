@@ -134,6 +134,7 @@ This project uses AWS App Runner for deployment, pulling Docker images from AWS 
 ---
 ## Architectural Diagram
 
+![IMG_1219](https://github.com/user-attachments/assets/3c482d6c-0027-4d2f-88fe-662fd52cb6a9)
 
 
 ### Final Repository Link
